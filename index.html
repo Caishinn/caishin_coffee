@@ -228,6 +228,12 @@
     }
   }
 
+  function removeItemFromCart(index, itemName) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+    resetMenuItemButton(itemName);
+  }
+
   function updateCartDisplay() {
     const cartItems = document.getElementById('cart-items');
     if (cart.length === 0) {
@@ -235,8 +241,11 @@
       return;
     }
     let html = '<ul>';
-    cart.forEach(item => {
-      html += `<li>${item.qty} × ${item.name} <span>$${(item.price * item.qty).toFixed(2)}</span></li>`;
+    cart.forEach((item, index) => {
+      html += `
+        <li>${item.qty} × ${item.name} <span>$${(item.price * item.qty).toFixed(2)}</span>
+        <button onclick="removeItemFromCart(${index}, '${item.name}')">Remove</button>
+        </li>`;
     });
     html += '</ul>';
     cartItems.innerHTML = html;
@@ -264,6 +273,13 @@
       button.innerText = 'Add to Cart';
       button.disabled = false;
     });
+  }
+
+  function resetMenuItemButton(itemName) {
+    const item = document.getElementById(`item-${itemName.toLowerCase()}`);
+    const button = item.querySelector('button');
+    button.innerText = 'Add to Cart';
+    button.disabled = false;
   }
 </script>
 
