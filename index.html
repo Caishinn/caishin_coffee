@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Cozy Coffee</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -10,53 +11,65 @@
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #fff8f0;
+      background: linear-gradient(135deg, #fdf6e3, #fae3d9);
       color: #333;
       line-height: 1.6;
+      padding: 10px;
     }
+
     header, footer {
-      background-color: #6f4e37;
+      background-color: #5d3a1a;
       color: white;
       text-align: center;
       padding: 20px;
+      border-radius: 12px;
     }
+
     header h1 {
       font-size: 2.5rem;
     }
+
     .hero {
       text-align: center;
       padding: 60px 20px;
-      background-color: #f4e4d6;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      color: #3e2723;
+      border-radius: 16px;
+      margin: 20px 0;
     }
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
+
     .menu-section, .cart-section, .checkout-section {
       max-width: 1000px;
-      margin: 40px auto;
+      margin: 20px auto;
       padding: 20px;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
+
     .menu-items {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
+
     .item {
-      background: #fefefe;
+      background: #fffdfa;
       padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      width: 220px;
+      border: 1px solid #eee;
+      border-radius: 12px;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
     .item img {
       width: 100%;
       height: 140px;
@@ -64,47 +77,82 @@
       border-radius: 8px;
       margin-bottom: 10px;
     }
+
     .item h3 {
       margin-bottom: 10px;
       font-size: 1.2rem;
     }
+
     .item p {
       margin-bottom: 10px;
       font-weight: bold;
+      color: #5d4037;
     }
+
     .item input {
       width: 60px;
+      padding: 6px;
       margin-bottom: 10px;
     }
+
     button {
-      background-color: #6f4e37;
+      background-color: #8d6e63;
       color: white;
       border: none;
       padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #5a3c2e;
+      background-color: #6d4c41;
     }
+
     ul {
       list-style: none;
       padding: 0;
     }
+
     .cart-items {
       margin: 10px 0;
       min-height: 30px;
     }
+
     .cart-items li {
       display: flex;
       justify-content: space-between;
       padding: 5px 0;
       border-bottom: 1px solid #ddd;
     }
+
     .checkout-section {
       display: none;
       text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+      .item {
+        padding: 16px;
+      }
+      button {
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        padding: 40px 10px;
+      }
+      .item input {
+        width: 50px;
+      }
     }
   </style>
 </head>
@@ -122,34 +170,27 @@
 
 <section class="menu-section">
   <h2 style="text-align:center; margin-bottom: 20px;">Menu</h2>
-  <div class="menu-items">
+  <div class="menu-items" id="menu-items">
     <div class="item">
-      <img src="https://source.unsplash.com/220x140/?latte" alt="Latte">
-      <h3>Latte</h3>
-      <p>$4.50</p>
-      <input type="number" min="1" value="1" id="qty-latte">
-      <button onclick="addToCart('Latte', 4.50, 'qty-latte')">Add to Cart</button>
-    </div>
-    <div class="item">
-      <img src="https://source.unsplash.com/220x140/?cappuccino" alt="Cappuccino">
-      <h3>Cappuccino</h3>
-      <p>$4.00</p>
-      <input type="number" min="1" value="1" id="qty-cappuccino">
-      <button onclick="addToCart('Cappuccino', 4.00, 'qty-cappuccino')">Add to Cart</button>
-    </div>
-    <div class="item">
-      <img src="https://source.unsplash.com/220x140/?espresso" alt="Espresso">
+      <img src="https://images.unsplash.com/photo-1550985607-bdc83b8fca68" alt="Espresso">
       <h3>Espresso</h3>
-      <p>$3.00</p>
-      <input type="number" min="1" value="1" id="qty-espresso">
-      <button onclick="addToCart('Espresso', 3.00, 'qty-espresso')">Add to Cart</button>
+      <p>$2.50</p>
+      <input id="qty-espresso" type="number" min="1" value="1">
+      <button onclick="addToCart('Espresso', 2.5, 'qty-espresso')">Add to Cart</button>
     </div>
     <div class="item">
-      <img src="https://source.unsplash.com/220x140/?muffin" alt="Muffin">
-      <h3>Blueberry Muffin</h3>
-      <p>$2.75</p>
-      <input type="number" min="1" value="1" id="qty-muffin">
-      <button onclick="addToCart('Blueberry Muffin', 2.75, 'qty-muffin')">Add to Cart</button>
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="Cappuccino">
+      <h3>Cappuccino</h3>
+      <p>$3.50</p>
+      <input id="qty-cappuccino" type="number" min="1" value="1">
+      <button onclick="addToCart('Cappuccino', 3.5, 'qty-cappuccino')">Add to Cart</button>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Latte">
+      <h3>Latte</h3>
+      <p>$4.00</p>
+      <input id="qty-latte" type="number" min="1" value="1">
+      <button onclick="addToCart('Latte', 4.0, 'qty-latte')">Add to Cart</button>
     </div>
   </div>
 </section>
@@ -175,67 +216,42 @@
 </footer>
 
 <script>
-  let cart = [];
+  const cart = [];
 
-  function addToCart(name, price, qtyId) {
-    const quantity = parseInt(document.getElementById(qtyId).value);
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.quantity += quantity;
-    } else {
-      cart.push({ name, price, quantity });
+  function addToCart(itemName, itemPrice, qtyId) {
+    const qty = parseInt(document.getElementById(qtyId).value);
+    if (qty > 0) {
+      cart.push({ name: itemName, price: itemPrice, qty: qty });
+      updateCartDisplay();
     }
-    updateCart();
   }
 
-  function updateCart() {
-    const cartContainer = document.getElementById('cart-items');
-    cartContainer.innerHTML = '';
-
+  function updateCartDisplay() {
+    const cartItems = document.getElementById('cart-items');
     if (cart.length === 0) {
-      cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+      cartItems.innerHTML = '<p>Your cart is empty.</p>';
       return;
     }
-
-    const ul = document.createElement('ul');
-    let total = 0;
-    cart.forEach((item, index) => {
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <span>${item.quantity} x ${item.name}</span>
-        <span>$${(item.price * item.quantity).toFixed(2)} <button onclick="removeItem(${index})">✕</button></span>
-      `;
-      ul.appendChild(li);
-      total += item.price * item.quantity;
+    let html = '<ul>';
+    cart.forEach(item => {
+      html += `<li>${item.qty} × ${item.name} <span>$${(item.price * item.qty).toFixed(2)}</span></li>`;
     });
-    cartContainer.appendChild(ul);
-
-    const totalEl = document.createElement('p');
-    totalEl.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
-    cartContainer.appendChild(totalEl);
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    updateCart();
+    html += '</ul>';
+    cartItems.innerHTML = html;
   }
 
   function checkout() {
-    if (cart.length === 0) {
-      alert("Your cart is empty!");
-    } else {
-      document.querySelector('.menu-section').style.display = 'none';
-      document.querySelector('.cart-section').style.display = 'none';
-      document.getElementById('checkout-section').style.display = 'block';
-    }
+    document.querySelector('.menu-section').style.display = 'none';
+    document.querySelector('.cart-section').style.display = 'none';
+    document.getElementById('checkout-section').style.display = 'block';
   }
 
   function goBackToMenu() {
-    cart = [];
-    updateCart();
     document.querySelector('.menu-section').style.display = 'block';
     document.querySelector('.cart-section').style.display = 'block';
     document.getElementById('checkout-section').style.display = 'none';
+    cart.length = 0;
+    updateCartDisplay();
   }
 </script>
 
