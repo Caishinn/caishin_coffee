@@ -171,26 +171,26 @@
 <section class="menu-section">
   <h2 style="text-align:center; margin-bottom: 20px;">Menu</h2>
   <div class="menu-items" id="menu-items">
-    <div class="item">
+    <div class="item" id="item-espresso">
       <img src="https://images.unsplash.com/photo-1550985607-bdc83b8fca68" alt="Espresso">
       <h3>Espresso</h3>
       <p>$2.50</p>
       <input id="qty-espresso" type="number" min="1" value="1">
-      <button onclick="addToCart('Espresso', 2.5, 'qty-espresso')">Add to Cart</button>
+      <button onclick="addToCart('Espresso', 2.5, 'qty-espresso', 'item-espresso')">Add to Cart</button>
     </div>
-    <div class="item">
+    <div class="item" id="item-cappuccino">
       <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="Cappuccino">
       <h3>Cappuccino</h3>
       <p>$3.50</p>
       <input id="qty-cappuccino" type="number" min="1" value="1">
-      <button onclick="addToCart('Cappuccino', 3.5, 'qty-cappuccino')">Add to Cart</button>
+      <button onclick="addToCart('Cappuccino', 3.5, 'qty-cappuccino', 'item-cappuccino')">Add to Cart</button>
     </div>
-    <div class="item">
+    <div class="item" id="item-latte">
       <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Latte">
       <h3>Latte</h3>
       <p>$4.00</p>
       <input id="qty-latte" type="number" min="1" value="1">
-      <button onclick="addToCart('Latte', 4.0, 'qty-latte')">Add to Cart</button>
+      <button onclick="addToCart('Latte', 4.0, 'qty-latte', 'item-latte')">Add to Cart</button>
     </div>
   </div>
 </section>
@@ -218,10 +218,12 @@
 <script>
   const cart = [];
 
-  function addToCart(itemName, itemPrice, qtyId) {
+  function addToCart(itemName, itemPrice, qtyId, itemId) {
     const qty = parseInt(document.getElementById(qtyId).value);
     if (qty > 0) {
       cart.push({ name: itemName, price: itemPrice, qty: qty });
+      document.getElementById(itemId).querySelector('button').innerText = 'Added';
+      document.getElementById(itemId).querySelector('button').disabled = true;
       updateCartDisplay();
     }
   }
@@ -252,6 +254,16 @@
     document.getElementById('checkout-section').style.display = 'none';
     cart.length = 0;
     updateCartDisplay();
+    resetButtons();
+  }
+
+  function resetButtons() {
+    const items = document.querySelectorAll('.item');
+    items.forEach(item => {
+      const button = item.querySelector('button');
+      button.innerText = 'Add to Cart';
+      button.disabled = false;
+    });
   }
 </script>
 
