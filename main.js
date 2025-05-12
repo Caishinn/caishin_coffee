@@ -1,402 +1,382 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #fdf6e3, #fae3d9);
-    color: #333;
-    line-height: 1.6;
-    padding: 10px;
-  }
-  .section-title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .centered {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .item img {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  header,
-  footer {
-    background-color: #483129;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  
-  header h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(to right, #fceabb, #f8b500);
-    color: #3e2723;
-    border-radius: 16px;
-    margin: 20px 0;
-  }
-  
-  .menu-section,
-  .cart-section,
-  .checkout-section {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-  
-  .menu-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  
-  .item {
-    background: #fffdfa;
-    padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .item img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .item h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .item p {
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #5d4037;
-  }
-  
-  .item input {
-    width: 60px;
-    padding: 6px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    background-color: #8d6e63;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #6d4c41;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .cart-items {
-    margin: 16px 0;
-    min-height: 30px;
-    text-align: center;
-  }
-  
-  .cart-items li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  /* Check out */
-  
-  .checkout-section {
-    display: none;
-    text-align: center;
-    padding: 10px;
-  }
-  .checkout-section h2 p {
-    text-align: center;
-    padding: 10px;
-    margin: 10px;
-  }
-  .checkout-section p {
-    font-size: 14px;
-  }
-  .checkout-section button {
-    margin: 16px;
-    padding: 10px;
-  }
-  .checkout-section ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
-  }
-  
-  .checkout-section li {
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  
-  .checkout-section p {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  /* Remove Button */
-  
-  .remove-btn {
-    background-color: #e74b4b;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .remove-btn:hover {
-    background-color: #d37c46;
-  }
-  
-  /* Cart Item */
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #d1c4b3;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    background-color: #faf0e6;
-    gap: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .cart-item.added {
-    animation: flash 0.5s ease-out;
-  }
-  
-  @keyframes flash {
-    0% {
-      background-color: #f9c5b5;
-    }
-    100% {
-      background-color: #faf0e6;
-    }
-  }
-  
-  .cart-item:hover {
-    background-color: #f1e4d1; /* Light highlight color */
-  }
-  
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 600;
-    border-top: 2px solid #d1c4b3;
-    padding-top: 10px;
-    margin-top: 10px;
-    transition: all 0.3s ease;
-  }
-  .item-info {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .item-info .price {
-    min-width: 60px;
-    text-align: right;
-    font-weight: 600;
-  }
-  
-  /* Total price */
-  
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 600;
-    border-top: 2px solid #d1c4b3;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
-  
-  .total-price {
-    min-width: 80px;
-    text-align: right;
-    font-size: 20px;
-    color: #7a4f35; /* Coffee brown */
-  }
-  .confirmation-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .confirmation-header .checkmark {
-    font-size: 40px;
-    color: #4CAF50;
-    margin-bottom: 10px;
-  }
-  
-  .confirmation-header h2 {
-    margin: 0;
-    font-size: 22px;
-    color: #333;
-  }
-  
-  .confirmation-header p {
-    color: #666;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  
- /* Order Confirmation Styles */
+const cart = [];
 
-  #checkout-section {
-    background-color: #fdfdfd;
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 500px;
-    margin: 20px auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', sans-serif;
+function addToCart(itemName, itemPrice, qtyId, itemId) {
+  const qty = parseInt(document.getElementById(qtyId).value);
+  if (qty > 0) {
+    cart.push({ name: itemName, price: itemPrice, qty: qty });
+    document.getElementById(itemId).querySelector("button").innerText = "Added";
+    document.getElementById(itemId).querySelector("button").disabled = true;
+    updateCartDisplay();
   }
-  
-  #order-summary {
-    margin-bottom: 20px;
+}
+// cart animation
+
+function addToCart(itemName, itemPrice, qtyId, itemId) {
+  const qty = parseInt(document.getElementById(qtyId).value);
+  if (qty > 0) {
+    cart.push({ name: itemName, price: itemPrice, qty: qty });
+    const button = document.getElementById(itemId).querySelector("button");
+    button.innerText = "Added";
+    button.disabled = true;
+
+    // Add "added" class for animation
+    const itemDiv = document.getElementById(itemId);
+    itemDiv.classList.add("added");
+
+    setTimeout(() => {
+      itemDiv.classList.remove("added");
+    }, 500);
+
+    updateCartDisplay();
   }
-  
-  #order-summary p {
-    margin: 6px 0;
-    font-size: 14px;
+}
+
+function removeItemFromCart(index, itemName) {
+  cart.splice(index, 1);
+  updateCartDisplay();
+  resetMenuItemButton(itemName);
+}
+
+function updateItemQuantity(index, newQty) {
+  if (newQty > 0) {
+    cart[index].qty = newQty;
+    updateCartDisplay();
   }
-  
-  #order-summary ul {
-    list-style: none;
-    padding: 0;
-    margin: 12px 0;
+}
+function updateItemQuantity(index, newQty) {
+  if (newQty > 0 && newQty <= 10) {
+    // Limit the quantity to 10
+    cart[index].qty = newQty;
+    updateCartDisplay();
   }
-  
-  #order-summary li {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px dashed #ccc;
-    font-size: 14px;
+}
+
+// Cart
+
+function updateCartDisplay() {
+  const cartItems = document.getElementById("cart-items");
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Your cart is empty. Please have your order.</p>";
+    return;
   }
-  
-  #order-summary li:last-child {
-    border-bottom: none;
+  let html = "<ul>";
+  cart.forEach((item, index) => {
+    html += `
+      <div class="cart-item">
+        <div class="item-info">
+          <span>${item.qty} × ${item.name}</span>
+          <span class="price">$${(item.price * item.qty).toFixed(2)}</span>
+        </div>
+        <button class="remove-btn" onclick="removeItemFromCart(${index}, '${
+      item.name
+    }')">Remove</button>
+      </div>`;
+  });
+
+  html += "</ul>";
+  cartItems.innerHTML = html;
+}
+function updateCartDisplay() {
+  const cartItems = document.getElementById("cart-items");
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Your cart is empty. Please have your order.</p>";
+    return;
   }
-  
-  #order-summary strong {
-    font-weight: bold;
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    html += `
+        <div class="cart-item">
+          <div class="item-info">
+            <span>${item.qty} × ${item.name}</span>
+            <span class="price">$${(item.price * item.qty).toFixed(2)}</span>
+          </div>
+          <button class="remove-btn" onclick="removeItemFromCart(${index}, '${
+      item.name
+    }')">Remove</button>
+        </div>`;
+  });
+
+  html += `
+      <div class="cart-total">
+        <span>Total:</span>
+        <span class="total-price">$${total.toFixed(2)}</span>
+      </div>
+    `;
+
+  cartItems.innerHTML = html;
+}
+
+// Check out
+
+function checkout() {
+  document.querySelector(".menu-section").style.display = "none";
+  document.querySelector(".cart-section").style.display = "none";
+  document.getElementById("checkout-section").style.display = "block";
+
+  const summary = document.getElementById("order-summary");
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = ""; // Clear previous QR if any
+
+  if (cart.length === 0) {
+    summary.innerHTML = "<p>Your cart was empty.</p>";
+    return;
   }
-  
-  .cart-total-confirm {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString();
+  const timeStr = now.toLocaleTimeString();
+  const orderId =
+    "MEOW-" +
+    Math.floor(Math.random() * 1000000)
+      .toString()
+      .padStart(6, "0");
+
+  let html = `<p><strong>Order ID:</strong> ${orderId}</p>`;
+  html += `<p><strong>Date:</strong> ${dateStr} &nbsp;&nbsp; <strong>Time:</strong> ${timeStr}</p>`;
+  html += "<ul>";
+  let total = 0;
+
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.qty;
+    total += itemTotal;
+    html += `<li>${item.qty} × ${item.name} — $${itemTotal.toFixed(2)}</li>`;
+  });
+
+  html += `</ul><p><strong>Total:</strong> $${total.toFixed(2)}</p>`;
+  summary.innerHTML = html;
+
+  // Generate QR Code
+
+  new QRCode(qrContainer, {
+    text: "https://pay.ababank.com/v8yVU9vQ6rmoAN3u7",
+    width: 128,
+    height: 128,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+}
+
+// Back to menu button
+
+function goBackToMenu() {
+  if (cart.length === 0) {
+    cartItems.innerHTML = `
+          <p>Your cart is empty. Please have your order.</p>
+          <button onclick="goBackToMenu()">Browse Menu</button>
+        `;
+    return;
   }
-  
-  #qrcode {
-    text-align: center;
-    margin-top: 20px;
+
+  document.querySelector(".menu-section").style.display = "block";
+  document.querySelector(".cart-section").style.display = "block";
+  document.getElementById("checkout-section").style.display = "none";
+  cart.length = 0;
+  updateCartDisplay();
+  resetButtons();
+}
+
+// Reset Button
+
+function resetButtons() {
+  const items = document.querySelectorAll(".item");
+  items.forEach((item) => {
+    const button = item.querySelector("button");
+    button.innerText = "Add to Cart";
+    button.disabled = false;
+  });
+}
+
+function resetMenuItemButton(itemName) {
+  const item = document.getElementById(`item-${itemName.toLowerCase()}`);
+  const button = item.querySelector("button");
+  button.innerText = "Add to Cart";
+  button.disabled = false;
+}
+
+// Download recide
+
+function downloadReceipt() {
+  if (cart.length === 0) {
+    alert("No items in cart to generate receipt.");
+    return;
   }
-  
-  #qrcode canvas {
-    border: 1px solid #ddd;
-    padding: 5px;
-    border-radius: 8px;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString();
+  const timeStr = now.toLocaleTimeString();
+  const orderId =
+    "MEOW-" +
+    Math.floor(Math.random() * 1000000)
+      .toString()
+      .padStart(6, "0");
+
+  let receipt = `Time to Meow Coffee\n`;
+  receipt += `------------------------\n`;
+  receipt += `Order ID : ${orderId}\nDate     : ${dateStr}\nTime     : ${timeStr}\n`;
+  receipt += `------------------------\n`;
+  receipt += `Qty  Item           Total\n`;
+  receipt += `------------------------\n`;
+
+  let total = 0;
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.qty;
+    total += itemTotal;
+    const line = `${item.qty.toString().padEnd(4)} ${item.name.padEnd(
+      14
+    )} $${itemTotal.toFixed(2)}`;
+    receipt += line + `\n`;
+  });
+
+  receipt += `------------------------\n`;
+  receipt += `TOTAL:               $${total.toFixed(2)}\n`;
+  receipt += `------------------------\n`;
+  receipt += `To Get the Cafe, Please Sent the Receipt to my Telegram or Facebook. Thank you for your order!\n`;
+
+  const blob = new Blob([receipt], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${orderId}-receipt.txt`;
+  link.click();
+}
+
+// Download PDF recide
+
+async function downloadPDFReceipt() {
+  if (cart.length === 0) {
+    alert("No items in cart to generate receipt.");
+    return;
   }
-  
-  #cart {
-    margin-bottom: 20px;
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString();
+  const timeStr = now.toLocaleTimeString();
+  const orderId =
+    "MEOW-" +
+    Math.floor(Math.random() * 1000000)
+      .toString()
+      .padStart(6, "0");
+
+  let y = 20;
+
+  // Header
+  doc.setFontSize(16);
+  doc.text("Time to Meow Coffee", 20, y);
+  y += 8;
+  doc.setFontSize(10);
+  doc.text("www.meowcoffee.com", 20, y);
+  y += 5;
+  doc.text("Phone: (855) 98 239 034", 20, y);
+  y += 10;
+
+  doc.setFontSize(12);
+  doc.text(`Order ID: ${orderId}`, 20, y);
+  y += 6;
+  doc.text(`Date: ${dateStr}   Time: ${timeStr}`, 20, y);
+  y += 10;
+
+  doc.text("Order Summary:", 20, y);
+  y += 6;
+  doc.setFont("Courier", "normal");
+  doc.setFontSize(10);
+
+  let total = 0;
+  cart.forEach((item) => {
+    const line = `${item.qty} x ${item.name.padEnd(12)} $${(
+      item.qty * item.price
+    ).toFixed(2)}`;
+    doc.text(line, 25, y);
+    total += item.qty * item.price;
+    y += 6;
+  });
+
+  doc.setFont("Helvetica", "bold");
+  y += 2;
+  doc.text(`Total: $${total.toFixed(2)}`, 25, y);
+  y += 12;
+
+  // QR Code generation using QRious
+  const qr = new QRious({
+    value: "https://pay.ababank.com/v8yVU9vQ6rmoAN3u7",
+    size: 100,
+  });
+
+  // Convert QR to Image and embed in PDF
+  const qrDataUrl = qr.toDataURL();
+  doc.addImage(qrDataUrl, "PNG", 70, y, 50, 50);
+  y += 60;
+
+  doc.setFont("Helvetica", "normal");
+  doc.text(
+    "Scan the QR code to Pay.'Also Screen Shot or Save And Sent The Receipt to my telegram (098 239 034)'.",
+    20,
+    y
+  );
+
+  // Save PDF
+  doc.save(`${orderId}-receipt.pdf`);
+}
+
+// ✅ SEND EMAIL FUNCTION
+function sendReceiptEmail() {
+  if (cart.length === 0) {
+    alert("Cart is empty.");
+    return;
   }
-  #cart table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  #cart th, #cart td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-  #cart th {
-    background-color: #f2f2f2;
-  }
-  #confirm-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #458500;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  #confirm-button:hover {
-    background-color: #356400;
-  }
-  
-  @media (max-width: 768px) {
-    .hero h2 {
-      font-size: 1.5rem;
-    }
-    .item {
-      padding: 16px;
-    }
-    button {
-      padding: 8px 16px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    header h1 {
-      font-size: 1.5rem;
-    }
-    .hero {
-      padding: 40px 10px;
-    }
-    .item input {
-      width: 50px;
-    }
-  }
+
+  let orders_html = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    const itemTotal = (item.price * item.qty).toFixed(2);
+    total += parseFloat(itemTotal);
+
+    orders_html += `
+      <tr>
+        <td><img src="${item.image_url}" alt="${item.name}" style="height: 64px;" /></td>
+        <td>
+          <div>${item.name}</div>
+          <div style="color: #888;">QTY: ${item.qty}</div>
+        </td>
+        <td style="text-align: right;"><strong>$${itemTotal}</strong></td>
+      </tr>
+    `;
+  });
+
+  const templateParams = {
+    order_id: "MEOW-" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0"),
+    email: "caishin0423@gmail.com", // You can replace with dynamic user email
+    orders_html: orders_html,
+    cost_shipping: "0.00",
+    cost_tax: "0.00",
+    cost_total: total.toFixed(2)
+  };
+
+  emailjs.send("Caishin_0423", "receipt", templateParams)
+    .then(response => {
+      alert("Receipt sent successfully!");
+      console.log("SUCCESS!", response.status, response.text);
+    })
+    .catch(err => {
+      console.error("FAILED...", err);
+      alert("Failed to send receipt.");
+    });
+}
+
+// ✅ ATTACH TO BUTTON
+function confirmPayment() {
+  sendReceiptEmail(); // this triggers the function above
+}
+
+// OPTIONAL
+function goBackToMenu() {
+  location.reload();
+}
