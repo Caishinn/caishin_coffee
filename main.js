@@ -9,6 +9,27 @@ function addToCart(itemName, itemPrice, qtyId, itemId) {
     updateCartDisplay();
   }
 }
+// cart animation
+
+function addToCart(itemName, itemPrice, qtyId, itemId) {
+  const qty = parseInt(document.getElementById(qtyId).value);
+  if (qty > 0) {
+    cart.push({ name: itemName, price: itemPrice, qty: qty });
+    const button = document.getElementById(itemId).querySelector("button");
+    button.innerText = "Added";
+    button.disabled = true;
+
+    // Add "added" class for animation
+    const itemDiv = document.getElementById(itemId);
+    itemDiv.classList.add("added");
+
+    setTimeout(() => {
+      itemDiv.classList.remove("added");
+    }, 500);
+
+    updateCartDisplay();
+  }
+}
 
 function removeItemFromCart(index, itemName) {
   cart.splice(index, 1);
@@ -176,50 +197,6 @@ function resetMenuItemButton(itemName) {
   const button = item.querySelector("button");
   button.innerText = "Add to Cart";
   button.disabled = false;
-}
-
-function loadCartFromLocalStorage() {
-  const savedCart = localStorage.getItem("cart");
-  if (savedCart) {
-    cart.push(...JSON.parse(savedCart));
-    updateCartDisplay();
-  }
-}
-
-function saveCartToLocalStorage() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-window.onload = loadCartFromLocalStorage; // Load cart on page load
-window.onbeforeunload = saveCartToLocalStorage; // Save cart when the page is about to unload
-
-// cart icon
-
-function updateCartItemCount() {
-  const itemCount = cart.reduce((total, item) => total + item.qty, 1);
-  document.getElementById("item-count").innerText = itemCount;
-}
-
-// cart animation
-
-function addToCart(itemName, itemPrice, qtyId, itemId) {
-  const qty = parseInt(document.getElementById(qtyId).value);
-  if (qty > 0) {
-    cart.push({ name: itemName, price: itemPrice, qty: qty });
-    const button = document.getElementById(itemId).querySelector("button");
-    button.innerText = "Added";
-    button.disabled = true;
-
-    // Add "added" class for animation
-    const itemDiv = document.getElementById(itemId);
-    itemDiv.classList.add("added");
-
-    setTimeout(() => {
-      itemDiv.classList.remove("added");
-    }, 500);
-
-    updateCartDisplay();
-  }
 }
 
 // Download recide
