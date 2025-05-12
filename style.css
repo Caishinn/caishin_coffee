@@ -350,6 +350,33 @@
     border-radius: 8px;
   }
   
+  #cart {
+    margin-bottom: 20px;
+  }
+  #cart table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #cart th, #cart td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  #cart th {
+    background-color: #f2f2f2;
+  }
+  #confirm-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #458500;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  #confirm-button:hover {
+    background-color: #356400;
+  }
+  
   @media (max-width: 768px) {
     .hero h2 {
       font-size: 1.5rem;
