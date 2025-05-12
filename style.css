@@ -11,6 +11,22 @@ body {
   line-height: 1.6;
   padding: 10px;
 }
+.section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.centered {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.item img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
 header,
 footer {
@@ -122,6 +138,8 @@ ul {
   border-bottom: 1px solid #ddd;
 }
 
+/* Check out */
+
 .checkout-section {
   display: none;
   text-align: center;
@@ -130,10 +148,122 @@ ul {
 .checkout-section h2 p {
   text-align: center;
   padding: 10px;
+  margin: 10px;
+}
+.checkout-section p {
+  font-size: 14px;
 }
 .checkout-section button {
   margin: 16px;
   padding: 10px;
+}
+.checkout-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.checkout-section li {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.checkout-section p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Remove Button */
+
+.remove-btn {
+  background-color: #e74b4b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #d37c46;
+}
+
+/* Cart Item */
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #d1c4b3;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background-color: #faf0e6;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item.added {
+  animation: flash 0.5s ease-out;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #f9c5b5;
+  }
+  100% {
+    background-color: #faf0e6;
+  }
+}
+
+.cart-item:hover {
+  background-color: #f1e4d1; /* Light highlight color */
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-top: 2px solid #d1c4b3;
+  padding-top: 10px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+.item-info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.item-info .price {
+  min-width: 60px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Total price */
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-top: 2px solid #d1c4b3;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.total-price {
+  min-width: 80px;
+  text-align: right;
+  font-size: 20px;
+  color: #7a4f35; /* Coffee brown */
 }
 
 @media (max-width: 768px) {

@@ -15,15 +15,18 @@
     <header>
       <h1>Time to Meow Coffee</h1>
       <p>Your favorite local coffee spot</p>
+      <div id="cart-icon" class="cart-icon">
+        🛒 <span id="item-count">0</span> items
+      </div>
     </header>
 
-    <section class="hero">
+    <!--section class="hero">
       <h2>Welcome to Meow Coffee</h2>
       <p>Enjoy freshly brewed coffee and warm vibes.</p>
-    </section>
+    </section-->
 
     <section class="menu-section">
-      <h2 style="text-align: center; margin-bottom: 20px">Menu</h2>
+      <h2 class="section-title">Menu</h2>
       <div class="menu-items" id="menu-items">
         <div class="item" id="item-espresso">
           <img src="./Image/image.png" alt="Espresso" />
@@ -36,6 +39,17 @@
             Add to Cart
           </button>
         </div>
+
+        <div class="item" id="item-milk">
+          <img src="./Image/image.png" alt="Milk" />
+          <h3>Milk</h3>
+          <p>$2.50</p>
+          <input id="qty-milk" type="number" min="1" value="1" />
+          <button onclick="addToCart('Milk', 2.5, 'qty-milk', 'item-milk')">
+            Add to Cart
+          </button>
+        </div>
+
         <div class="item" id="item-cappuccino">
           <img
             src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
@@ -50,6 +64,7 @@
             Add to Cart
           </button>
         </div>
+
         <div class="item" id="item-latte">
           <img
             src="https://images.unsplash.com/photo-1511920170033-f8396924c348"
@@ -66,19 +81,26 @@
     </section>
 
     <section class="cart-section">
-      <h2 style="text-align: center; margin-bottom: 10px">Cart</h2>
+      <h2 class="section-title">Cart</h2>
       <div class="cart-items" id="cart-items">
         <p>Your cart is empty. Please have your order.</p>
       </div>
-      <div style="text-align: center; margin-top: 10px">
+      <div class="centered">
         <button onclick="checkout()">Checkout</button>
       </div>
     </section>
 
-    <section class="checkout-section" id="checkout-section">
+    <section
+      class="checkout-section"
+      id="checkout-section"
+      style="display: none"
+    >
       <h2>Order Confirmation</h2>
-      <p>Thank you for your order!</p>
+      <div id="order-summary"></div>
+      <div id="qrcode" style="margin: 20px auto; width: fit-content"></div>
       <button onclick="goBackToMenu()">Back to Menu</button>
+      <!--button onclick="downloadReceipt()">Download Receipt</button-->
+      <button onclick="downloadPDFReceipt()">Download PDF Receipt</button>
     </section>
 
     <footer>
@@ -86,5 +108,10 @@
     </footer>
 
     <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <!-- jsPDF for generating PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- QRious for generating QR code as image -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   </body>
 </html>
