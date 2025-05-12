@@ -316,7 +316,7 @@ async function downloadPDFReceipt() {
 
   doc.setFont("Helvetica", "normal");
   doc.text(
-    "Scan the QR code to Pay. And Sent The Receipt to my telegram (098239034).",
+    "Scan the QR code to Pay.'Also Screen Shot or Save And Sent The Receipt to my telegram (098 239 034)'.",
     20,
     y
   );
