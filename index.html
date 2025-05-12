@@ -92,12 +92,24 @@
       id="checkout-section"
       style="display: none"
     >
+      
       <h2>Order Confirmation</h2>
       <div id="order-summary"></div>
       <div id="qrcode" style="margin: 20px auto; width: fit-content"></div>
+      <div id="checkout-section" style="display: none;">
+        <h2>Order Confirmation</h2>
+        <div id="order-summary"></div>
+        <div id="qrcode"></div>
+      </div>
+      <div class="confirmation-header">
+        <div class="checkmark">&#10004;</div>
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been placed successfully.</p>
+      </div>
       <button onclick="goBackToMenu()">Back to Menu</button>
       <!--button onclick="downloadReceipt()">Download Receipt</button-->
       <button onclick="downloadPDFReceipt()">Download PDF Receipt</button>
+      
     </section>
 
     <footer>
