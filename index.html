@@ -106,10 +106,11 @@
         <h2>Thank you for your order!</h2>
         <p>Your order has been placed successfully.</p>
       </div>
+      
       <button onclick="goBackToMenu()">Back to Menu</button>
       <!--button onclick="downloadReceipt()">Download Receipt</button-->
-      <button onclick="downloadPDFReceipt()">Download PDF Receipt</button>
-      
+      <!--button onclick="downloadPDFReceipt()">Download PDF Receipt</button-->
+      <button onclick="sendReceiptEmail()">Confirm Payment & Send Receipt</button>
     </section>
 
     <footer>
@@ -122,5 +123,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- QRious for generating QR code as image -->
     <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with your Public Key
+    (function() {
+      emailjs.init("Tw0ALWJA4xmw9hjl_"); // Replace with your actual Public Key
+    })();
+  </script>
+    <script>
+        // ✅ GLOBAL CART
+        const cart = [];
+      
+        // ✅ ADD TO CART FUNCTION
+        function addToCart(name, price, qtyInputId, itemId) {
+          const qty = parseInt(document.getElementById(qtyInputId).value);
+          const image = document.querySelector(`#${itemId} img`).src;
+      
+          const existingItem = cart.find(item => item.name === name);
+          if (existingItem) {
+            existingItem.qty += qty;
+          } else {
+            cart.push({ name, qty, price, image_url: image });
+          }
+      
+          updateCartDisplay();
+        }
+      
+        // ✅ UPDATE CART DISPLAY (optional)
+        function updateCartDisplay() {
+          const cartItemsContainer = document.getElementById("cart-items");
+          cartItemsContainer.innerHTML = "";
+      
+          if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Your cart is empty. Please have your order.</p>";
+            return;
+          }
+      
+          const table = document.createElement("table");
+          cart.forEach(item => {
+            const row = document.createElement("tr");
+      
+            const nameCell = document.createElement("td");
+            nameCell.textContent = item.name;
+      
+            const qtyCell = document.createElement("td");
+            qtyCell.textContent = `Qty: ${item.qty}`;
+      
+            const priceCell = document.createElement("td");
+            priceCell.textContent = `$${(item.price * item.qty).toFixed(2)}`;
+      
+            row.appendChild(nameCell);
+            row.appendChild(qtyCell);
+            row.appendChild(priceCell);
+            table.appendChild(row);
+          });
+      
+          cartItemsContainer.appendChild(table);
+        }
+      </script>
+      
   </body>
 </html>
