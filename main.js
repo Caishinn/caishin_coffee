@@ -1,16 +1,8 @@
+// Global variables
 const cart = [];
+let orderId = "";
 
-function addToCart(itemName, itemPrice, qtyId, itemId) {
-  const qty = parseInt(document.getElementById(qtyId).value);
-  if (qty > 0) {
-    cart.push({ name: itemName, price: itemPrice, qty: qty });
-    document.getElementById(itemId).querySelector("button").innerText = "Added";
-    document.getElementById(itemId).querySelector("button").disabled = true;
-    updateCartDisplay();
-  }
-}
-// cart animation
-
+// Add to Cart
 function addToCart(itemName, itemPrice, qtyId, itemId) {
   const qty = parseInt(document.getElementById(qtyId).value);
   if (qty > 0) {
@@ -19,13 +11,9 @@ function addToCart(itemName, itemPrice, qtyId, itemId) {
     button.innerText = "Added";
     button.disabled = true;
 
-    // Add "added" class for animation
     const itemDiv = document.getElementById(itemId);
     itemDiv.classList.add("added");
-
-    setTimeout(() => {
-      itemDiv.classList.remove("added");
-    }, 500);
+    setTimeout(() => itemDiv.classList.remove("added"), 500);
 
     updateCartDisplay();
   }
@@ -38,44 +26,12 @@ function removeItemFromCart(index, itemName) {
 }
 
 function updateItemQuantity(index, newQty) {
-  if (newQty > 0) {
-    cart[index].qty = newQty;
-    updateCartDisplay();
-  }
-}
-function updateItemQuantity(index, newQty) {
   if (newQty > 0 && newQty <= 10) {
-    // Limit the quantity to 10
     cart[index].qty = newQty;
     updateCartDisplay();
   }
 }
 
-// Cart
-
-function updateCartDisplay() {
-  const cartItems = document.getElementById("cart-items");
-  if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Your cart is empty. Please have your order.</p>";
-    return;
-  }
-  let html = "<ul>";
-  cart.forEach((item, index) => {
-    html += `
-      <div class="cart-item">
-        <div class="item-info">
-          <span>${item.qty} × ${item.name}</span>
-          <span class="price">$${(item.price * item.qty).toFixed(2)}</span>
-        </div>
-        <button class="remove-btn" onclick="removeItemFromCart(${index}, '${
-      item.name
-    }')">Remove</button>
-      </div>`;
-  });
-
-  html += "</ul>";
-  cartItems.innerHTML = html;
-}
 function updateCartDisplay() {
   const cartItems = document.getElementById("cart-items");
 
@@ -90,28 +46,23 @@ function updateCartDisplay() {
   cart.forEach((item, index) => {
     total += item.price * item.qty;
     html += `
-        <div class="cart-item">
-          <div class="item-info">
-            <span>${item.qty} × ${item.name}</span>
-            <span class="price">$${(item.price * item.qty).toFixed(2)}</span>
-          </div>
-          <button class="remove-btn" onclick="removeItemFromCart(${index}, '${
-      item.name
-    }')">Remove</button>
-        </div>`;
+      <div class="cart-item">
+        <div class="item-info">
+          <span>${item.qty} × ${item.name}</span>
+          <span class="price">$${(item.price * item.qty).toFixed(2)}</span>
+        </div>
+        <button class="remove-btn" onclick="removeItemFromCart(${index}, '${item.name}')">Remove</button>
+      </div>`;
   });
 
   html += `
-      <div class="cart-total">
-        <span>Total:</span>
-        <span class="total-price">$${total.toFixed(2)}</span>
-      </div>
-    `;
+    <div class="cart-total">
+      <span>Total:</span>
+      <span class="total-price">$${total.toFixed(2)}</span>
+    </div>`;
 
   cartItems.innerHTML = html;
 }
-
-// Check out
 
 function checkout() {
   document.querySelector(".menu-section").style.display = "none";
@@ -120,7 +71,7 @@ function checkout() {
 
   const summary = document.getElementById("order-summary");
   const qrContainer = document.getElementById("qrcode");
-  qrContainer.innerHTML = ""; // Clear previous QR if any
+  qrContainer.innerHTML = "";
 
   if (cart.length === 0) {
     summary.innerHTML = "<p>Your cart was empty.</p>";
@@ -130,11 +81,7 @@ function checkout() {
   const now = new Date();
   const dateStr = now.toLocaleDateString();
   const timeStr = now.toLocaleTimeString();
-  const orderId =
-    "MEOW-" +
-    Math.floor(Math.random() * 1000000)
-      .toString()
-      .padStart(6, "0");
+  orderId = "MEOW-" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0");
 
   let html = `<p><strong>Order ID:</strong> ${orderId}</p>`;
   html += `<p><strong>Date:</strong> ${dateStr} &nbsp;&nbsp; <strong>Time:</strong> ${timeStr}</p>`;
@@ -150,8 +97,6 @@ function checkout() {
   html += `</ul><p><strong>Total:</strong> $${total.toFixed(2)}</p>`;
   summary.innerHTML = html;
 
-  // Generate QR Code
-
   new QRCode(qrContainer, {
     text: "https://pay.ababank.com/v8yVU9vQ6rmoAN3u7",
     width: 128,
@@ -162,26 +107,9 @@ function checkout() {
   });
 }
 
-// Back to menu button
-
 function goBackToMenu() {
-  if (cart.length === 0) {
-    cartItems.innerHTML = `
-          <p>Your cart is empty. Please have your order.</p>
-          <button onclick="goBackToMenu()">Browse Menu</button>
-        `;
-    return;
-  }
-
-  document.querySelector(".menu-section").style.display = "block";
-  document.querySelector(".cart-section").style.display = "block";
-  document.getElementById("checkout-section").style.display = "none";
-  cart.length = 0;
-  updateCartDisplay();
-  resetButtons();
+  location.reload();
 }
-
-// Reset Button
 
 function resetButtons() {
   const items = document.querySelectorAll(".item");
@@ -199,8 +127,6 @@ function resetMenuItemButton(itemName) {
   button.disabled = false;
 }
 
-// Download recide
-
 function downloadReceipt() {
   if (cart.length === 0) {
     alert("No items in cart to generate receipt.");
@@ -210,11 +136,6 @@ function downloadReceipt() {
   const now = new Date();
   const dateStr = now.toLocaleDateString();
   const timeStr = now.toLocaleTimeString();
-  const orderId =
-    "MEOW-" +
-    Math.floor(Math.random() * 1000000)
-      .toString()
-      .padStart(6, "0");
 
   let receipt = `Time to Meow Coffee\n`;
   receipt += `------------------------\n`;
@@ -227,16 +148,14 @@ function downloadReceipt() {
   cart.forEach((item) => {
     const itemTotal = item.price * item.qty;
     total += itemTotal;
-    const line = `${item.qty.toString().padEnd(4)} ${item.name.padEnd(
-      14
-    )} $${itemTotal.toFixed(2)}`;
+    const line = `${item.qty.toString().padEnd(4)} ${item.name.padEnd(14)} $${itemTotal.toFixed(2)}`;
     receipt += line + `\n`;
   });
 
   receipt += `------------------------\n`;
   receipt += `TOTAL:               $${total.toFixed(2)}\n`;
   receipt += `------------------------\n`;
-  receipt += `To Get the Cafe, Please Sent the Receipt to my Telegram or Facebook. Thank you for your order!\n`;
+  receipt += `To Get the Cafe, Please Send the Receipt to my Telegram or Facebook. Thank you for your order!\n`;
 
   const blob = new Blob([receipt], { type: "text/plain" });
   const link = document.createElement("a");
@@ -244,8 +163,6 @@ function downloadReceipt() {
   link.download = `${orderId}-receipt.txt`;
   link.click();
 }
-
-// Download PDF recide
 
 async function downloadPDFReceipt() {
   if (cart.length === 0) {
@@ -259,15 +176,8 @@ async function downloadPDFReceipt() {
   const now = new Date();
   const dateStr = now.toLocaleDateString();
   const timeStr = now.toLocaleTimeString();
-  const orderId =
-    "MEOW-" +
-    Math.floor(Math.random() * 1000000)
-      .toString()
-      .padStart(6, "0");
-
   let y = 20;
 
-  // Header
   doc.setFontSize(16);
   doc.text("Time to Meow Coffee", 20, y);
   y += 8;
@@ -290,9 +200,7 @@ async function downloadPDFReceipt() {
 
   let total = 0;
   cart.forEach((item) => {
-    const line = `${item.qty} x ${item.name.padEnd(12)} $${(
-      item.qty * item.price
-    ).toFixed(2)}`;
+    const line = `${item.qty} x ${item.name.padEnd(12)} $${(item.qty * item.price).toFixed(2)}`;
     doc.text(line, 25, y);
     total += item.qty * item.price;
     y += 6;
@@ -303,29 +211,16 @@ async function downloadPDFReceipt() {
   doc.text(`Total: $${total.toFixed(2)}`, 25, y);
   y += 12;
 
-  // QR Code generation using QRious
-  const qr = new QRious({
-    value: "https://pay.ababank.com/v8yVU9vQ6rmoAN3u7",
-    size: 100,
-  });
-
-  // Convert QR to Image and embed in PDF
+  const qr = new QRious({ value: "https://pay.ababank.com/v8yVU9vQ6rmoAN3u7", size: 100 });
   const qrDataUrl = qr.toDataURL();
   doc.addImage(qrDataUrl, "PNG", 70, y, 50, 50);
   y += 60;
 
   doc.setFont("Helvetica", "normal");
-  doc.text(
-    "Scan the QR code to Pay.'Also Screen Shot or Save And Sent The Receipt to my telegram (098 239 034)'.",
-    20,
-    y
-  );
-
-  // Save PDF
+  doc.text("Scan the QR code to Pay. Also Screenshot or Send the Receipt to Telegram (098 239 034).", 20, y);
   doc.save(`${orderId}-receipt.pdf`);
 }
 
-// ✅ SEND EMAIL FUNCTION
 function sendReceiptEmail() {
   if (cart.length === 0) {
     alert("Cart is empty.");
@@ -347,13 +242,12 @@ function sendReceiptEmail() {
           <div style="color: #888;">QTY: ${item.qty}</div>
         </td>
         <td style="text-align: right;"><strong>$${itemTotal}</strong></td>
-      </tr>
-    `;
+      </tr>`;
   });
 
   const templateParams = {
-    order_id: "MEOW-" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0"),
-    email: "caishin0423@gmail.com", // You can replace with dynamic user email
+    order_id: orderId,
+    email: "caishin0423@gmail.com",
     orders_html: orders_html,
     cost_shipping: "0.00",
     cost_tax: "0.00",
@@ -371,12 +265,6 @@ function sendReceiptEmail() {
     });
 }
 
-// ✅ ATTACH TO BUTTON
 function confirmPayment() {
-  sendReceiptEmail(); // this triggers the function above
-}
-
-// OPTIONAL
-function goBackToMenu() {
-  location.reload();
+  sendReceiptEmail();
 }
