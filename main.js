@@ -429,3 +429,34 @@ window.addEventListener('load', () => {
   document.getElementById('modal-overlay')?.addEventListener('click', closeOrderHistory);
   document.getElementById('clear-history-btn')?.addEventListener('click', clearOrderHistory);
 });
+
+function openMobileCart() {
+  const sheet = document.getElementById('mobile-cart-sheet');
+  if (!sheet) return;
+  
+  sheet.classList.remove('hidden');
+  // Trigger reflow to allow CSS animation if you want
+  void sheet.offsetWidth;
+  sheet.classList.add('show'); 
+
+  updateMobileCart(); // update cart contents
+}
+
+function closeMobileCart() {
+  const sheet = document.getElementById('mobile-cart-sheet');
+  if (!sheet) return;
+  
+  sheet.classList.remove('show');
+  // Wait for CSS transition before hiding completely
+  setTimeout(() => sheet.classList.add('hidden'), 300);
+}
+function openOrderHistory() {
+  document.getElementById('order-history-modal').style.display = 'block';
+  document.getElementById('modal-overlay').style.display = 'block';
+  loadOrderHistory();
+}
+
+function closeOrderHistory() {
+  document.getElementById('order-history-modal').style.display = 'none';
+  document.getElementById('modal-overlay').style.display = 'none';
+}
