@@ -11,10 +11,64 @@
       rel="stylesheet"
     />
   </head>
+  
   <body>
     <header>
       <h1>Time to Meow Coffee</h1>
       <p>Your favorite local coffee spot</p>
+        <!-- Order History Button in header -->
+        <button id="order-history-btn" >Order History</button>
+        <!-- Mobile Bottom Sheet Cart -->
+<div id="mobile-cart-sheet" class="mobile-cart hidden">
+  <div class="mobile-cart-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeMobileCart()">×</button>
+  </div>
+  <div id="mobile-cart-items" class="mobile-cart-items">
+    <!-- Items will be dynamically inserted here -->
+  </div>
+  <button onclick="checkout(); closeMobileCart();" class="checkout-btn">Checkout</button>
+
+</div>
+
+<div class="mobile-cart-container">
+<button
+      id="mobile-cart-btn"
+      class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition"
+    >
+      🛒 Cart
+      <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5 hidden">
+    0
+  </span>
+    </button></div>
+  
+
+
+<!-- Modal Overlay -->
+<div id="modal-overlay"></div>
+
+
+
+
+
+
+<!-- Order History Modal -->
+<div id="order-history-modal" role="dialog" aria-modal="true" aria-labelledby="order-history-title" style="display: none;">
+  <button id="close-history-btn" aria-label="Close order history">&times;</button>
+  <h2 id="order-history-title">Order History</h2>
+  
+  <div id="order-history-header" style="text-align: center; margin-bottom: 12px; font-weight: bold; font-size: 16px;"></div>
+  
+  <!-- Only ONE element with this ID -->
+  <div id="order-history-list" class="order-history-list"></div>
+
+  <!-- Clear Button -->
+  <button id="clear-history-btn" onclick="clearOrderHistory()">Clear Order History</button>
+</div>
+  
+ 
+
+</div>
     </header>
 
     <!--section class="hero">
@@ -74,6 +128,8 @@
             Add to Cart
           </button>
         </div>
+        
+       
       </div>
     </section>
 
@@ -110,7 +166,14 @@
       <button onclick="goBackToMenu()">Back to Menu</button>
       <!--button onclick="downloadReceipt()">Download Receipt</button-->
       <!--button onclick="downloadPDFReceipt()">Download PDF Receipt</button-->
-      <button onclick="sendReceiptEmail()">Confirm Payment & Send Receipt</button>
+      <button onclick="confirmPayment()">Confirm Payment</button>
+
+    </section>
+    <!-- History Section -->
+    <section id="history-section" class="history-section" style="display:none;">
+      <h2>Order History</h2>
+      <div id="history-list"></div>
+      <button onclick="hideHistory()" class="btn-secondary">Back to Menu</button>
     </section>
 
     <footer>
@@ -130,57 +193,6 @@
       emailjs.init("YEgB_VoTVNm_6JXu6"); // Replace with your actual Public Key
     })();
   </script>
-    <script>
-        // ✅ GLOBAL CART
-        const cart = [];
-      
-        // ✅ ADD TO CART FUNCTION
-        function addToCart(name, price, qtyInputId, itemId) {
-          const qty = parseInt(document.getElementById(qtyInputId).value);
-          const image = document.querySelector(`#${itemId} img`).src;
-      
-          const existingItem = cart.find(item => item.name === name);
-          if (existingItem) {
-            existingItem.qty += qty;
-          } else {
-            cart.push({ name, qty, price, image_url: image });
-          }
-      
-          updateCartDisplay();
-        }
-      
-        // ✅ UPDATE CART DISPLAY (optional)
-        function updateCartDisplay() {
-          const cartItemsContainer = document.getElementById("cart-items");
-          cartItemsContainer.innerHTML = "";
-      
-          if (cart.length === 0) {
-            cartItemsContainer.innerHTML = "<p>Your cart is empty. Please have your order.</p>";
-            return;
-          }
-      
-          const table = document.createElement("table");
-          cart.forEach(item => {
-            const row = document.createElement("tr");
-      
-            const nameCell = document.createElement("td");
-            nameCell.textContent = item.name;
-      
-            const qtyCell = document.createElement("td");
-            qtyCell.textContent = `Qty: ${item.qty}`;
-      
-            const priceCell = document.createElement("td");
-            priceCell.textContent = `$${(item.price * item.qty).toFixed(2)}`;
-      
-            row.appendChild(nameCell);
-            row.appendChild(qtyCell);
-            row.appendChild(priceCell);
-            table.appendChild(row);
-          });
-      
-          cartItemsContainer.appendChild(table);
-        }
-      </script>
-      
+   
   </body>
 </html>
