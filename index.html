@@ -25,22 +25,15 @@
     <button onclick="closeMobileCart()">×</button>
   </div>
   <div id="mobile-cart-items" class="mobile-cart-items">
-    <!-- Items will be dynamically inserted here -->
+    <!-- Items dynamically inserted here -->
   </div>
   <button onclick="checkout(); closeMobileCart();" class="checkout-btn">Checkout</button>
-
 </div>
 
+
 <div class="mobile-cart-container">
-<button
-      id="mobile-cart-btn"
-      class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition"
-    >
-      🛒 Cart
-      <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5 py-0.5 hidden">
-    0
-  </span>
-    </button></div>
+<button id="mobile-cart-btn" onclick="openMobileCart()" class="...">🛒 Cart <span id="cart-count" ...>0</span></button>
+</div>
   
 
 
